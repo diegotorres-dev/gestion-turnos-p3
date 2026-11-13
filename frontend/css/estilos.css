@@ -1,0 +1,441 @@
+ 
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    color: #222;
+}
+
+.contenedor {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.tarjeta {
+    width: 100%;
+    max-width: 420px;
+    padding: 32px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px #00000015;
+}
+
+h1 {
+    margin-top: 0;
+    color: #002855;
+    font-size: 26px;
+}
+
+.tarjeta > p {
+    color: #666;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 13px;
+    border: none;
+    border-radius: 6px;
+    background: #002855;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #004080;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+#mensaje {
+    overflow-wrap: anywhere;
+    margin-bottom: 0;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background: #002855;
+    color: white;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.sidebar h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar nav button {
+    background: transparent;
+    text-align: left;
+    padding: 12px;
+}
+
+.sidebar nav button:hover,
+.sidebar nav .activo {
+    background: #ffffff22;
+}
+
+.contenido {
+    padding: 32px;
+    min-width: 0;
+}
+
+.encabezado {
+    margin-bottom: 24px;
+}
+
+.encabezado h1 {
+    margin-bottom: 4px;
+}
+
+.encabezado p {
+    margin: 0;
+    color: #666;
+}
+
+.resumen {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.indicador {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 18px #00000010;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.indicador-valor {
+    font-size: 30px;
+    font-weight: bold;
+    color: #002855;
+}
+
+.indicador-titulo {
+    color: #666;
+    font-size: 14px;
+}
+
+.seccion-turnos {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 18px #00000010;
+}
+
+.barra-herramientas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.barra-herramientas h2 {
+    margin: 0;
+    color: #002855;
+    font-size: 20px;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filtros input,
+.filtros select {
+    margin: 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    background: white;
+}
+
+.filtros input {
+    min-width: 240px;
+}
+
+.boton-secundario {
+    padding: 10px 16px;
+    font-size: 15px;
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.tabla th,
+.tabla td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    white-space: nowrap;
+}
+
+.tabla th {
+    background: #f4f6fa;
+    color: #002855;
+    position: sticky;
+    top: 0;
+}
+
+.tabla tbody tr:hover {
+    background: #f9fafc;
+}
+
+.etiqueta {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: bold;
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.etiqueta-confirmado {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.etiqueta-reservado {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.etiqueta-cancelado {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.estado-tabla {
+    text-align: center;
+    color: #666;
+    padding: 24px;
+    margin: 0;
+}
+
+.skeleton {
+    display: block;
+    height: 14px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #eee 25%, #f7f7f7 50%, #eee 75%);
+    background-size: 200% 100%;
+    animation: brillo 1.2s infinite;
+}
+
+@keyframes brillo {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+}
+
+@media (max-width: 800px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar nav {
+        flex-direction: row;
+    }
+
+    .resumen {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contenido {
+        padding: 16px;
+    }
+
+    .filtros input {
+        min-width: 0;
+        width: 100%;
+    }
+}
+
+.acciones {
+    display: flex;
+    gap: 8px;
+}
+
+.boton-tabla {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+.boton-peligro-suave {
+    background: white;
+    color: #991b1b;
+    border: 1px solid #991b1b;
+}
+
+.boton-peligro-suave:hover {
+    background: #fee2e2;
+}
+
+.boton-claro {
+    background: #e5e7eb;
+    color: #222;
+}
+
+.boton-claro:hover {
+    background: #d1d5db;
+}
+
+.boton-peligro {
+    background: #991b1b;
+}
+
+.boton-peligro:hover {
+    background: #7f1d1d;
+}
+
+.aviso {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 0 0 16px;
+    font-size: 14px;
+}
+
+.aviso-exito {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.aviso-error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.dialogo {
+    width: 100%;
+    max-width: 440px;
+    padding: 24px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px #00000030;
+}
+
+.dialogo::backdrop {
+    background: #00000066;
+}
+
+.dialogo h2 {
+    margin: 0 0 8px;
+    color: #002855;
+    font-size: 20px;
+}
+
+.dialogo p {
+    margin: 0 0 12px;
+    color: #444;
+}
+
+.dialogo form {
+    margin-top: 16px;
+    gap: 6px;
+}
+
+.dialogo input {
+    margin-bottom: 4px;
+}
+
+.mensaje-error {
+    color: #991b1b;
+    font-size: 14px;
+}
+
+.dialogo-botones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+}
+
+.sidebar :focus-visible {
+    outline-color: white;
+}
+
+.tabla td {
+    height: 56px;
+}
+
+.filtros input[type="search"] {
+    min-width: 300px;
+}
+
+.dialogo .mensaje-error {
+    color: #991b1b;
+    font-weight: bold;
+}
+
+.dialogo .ayuda {
+    margin: 0 0 4px;
+    font-size: 13px;
+    color: #555;
+}
+
+#mensaje {
+    color: #991b1b !important;
+}
+
+.tabla th,
+.tabla td {
+    padding: 12px 8px;
+}

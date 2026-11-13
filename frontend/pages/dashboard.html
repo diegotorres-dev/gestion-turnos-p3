@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de administración | Gestión de Turnos</title>
+    <meta name="description" content="Panel de administración para consultar los turnos médicos registrados.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+            <h2>Gestión de Turnos</h2>
+
+            <nav>
+                <button id="irATurnos" type="button" class="enlace-nav activo">Turnos</button>
+                <button id="cerrarSesion" type="button">Cerrar sesión</button>
+            </nav>
+        </aside>
+
+        <main class="contenido">
+            <header class="encabezado">
+                <h1>Panel de administración</h1>
+                <p id="datosUsuario">Cargando usuario...</p>
+            </header>
+
+            <section id="resumen" class="resumen" aria-label="Resumen de turnos">
+                <article class="indicador">
+                    <span class="indicador-valor" data-total>–</span>
+                    <span class="indicador-titulo">Total</span>
+                </article>
+                <article class="indicador">
+                    <span class="indicador-valor" data-reservados>–</span>
+                    <span class="indicador-titulo">Reservados</span>
+                </article>
+                <article class="indicador">
+                    <span class="indicador-valor" data-confirmados>–</span>
+                    <span class="indicador-titulo">Confirmados</span>
+                </article>
+                <article class="indicador">
+                    <span class="indicador-valor" data-cancelados>–</span>
+                    <span class="indicador-titulo">Cancelados</span>
+                </article>
+            </section>
+
+            <section id="turnos" class="seccion-turnos">
+                <div class="barra-herramientas">
+                    <h2>Turnos registrados</h2>
+                    <div class="filtros">
+                        <input type="search" id="buscador" placeholder="Buscar paciente, DNI o práctica" aria-label="Buscar turnos">
+                        <select id="filtroEstado" aria-label="Filtrar por estado">
+                            <option value="">Todos los estados</option>
+                            <option value="Reservado">Reservado</option>
+                            <option value="Confirmado">Confirmado</option>
+                            <option value="Cancelado">Cancelado</option>
+                        </select>
+                        <button id="recargar" type="button" class="boton-secundario">Actualizar</button>
+                    </div>
+                </div>
+
+                <p id="avisoAccion" class="aviso" role="status" aria-live="polite" hidden></p>
+
+                <div class="tabla-contenedor">
+                    <table class="tabla">
+                        <thead>
+                            <tr>
+                                <th>N.º</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Paciente</th>
+                                <th>DNI</th>
+                                <th>Práctica</th>
+                                <th>Medio</th>
+                                <th>Estado</th>
+                                <th>Médico</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTurnos"></tbody>
+                    </table>
+                    <p id="estadoTurnos" class="estado-tabla" role="status" aria-live="polite" hidden></p>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <dialog id="dialogoConfirmar" class="dialogo" aria-labelledby="tituloConfirmar">
+        <h2 id="tituloConfirmar">Confirmar turno</h2>
+        <p id="resumenConfirmar"></p>
+        <form id="formConfirmar">
+            <label for="matriculaMedico">Matrícula del médico</label>
+            <input type="text" id="matriculaMedico" inputmode="numeric" pattern="[0-9]+" placeholder="Ejemplo: 1003" aria-describedby="ayudaMatricula" required>
+            <p id="ayudaMatricula" class="ayuda">Debe ser un médico habilitado para la práctica de este turno.</p>
+            <p id="errorConfirmar" class="mensaje-error" role="alert" hidden></p>
+            <div class="dialogo-botones">
+                <button type="button" id="volverConfirmar" class="boton-claro">Volver</button>
+                <button type="submit" id="enviarConfirmar">Confirmar turno</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="dialogoCancelar" class="dialogo" aria-labelledby="tituloCancelar">
+        <h2 id="tituloCancelar">Cancelar turno</h2>
+        <p id="resumenCancelar"></p>
+        <p>Esta acción no se puede deshacer.</p>
+        <div class="dialogo-botones">
+            <button type="button" id="volverCancelar" class="boton-claro">Volver</button>
+            <button type="button" id="enviarCancelar" class="boton-peligro">Sí, cancelar turno</button>
+        </div>
+    </dialog>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

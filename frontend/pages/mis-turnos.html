@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis turnos | Gestión de Turnos</title>
+    <meta name="description" content="Consulta de los turnos médicos del usuario que inició sesión.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+            <h2>Gestión de Turnos</h2>
+
+            <nav>
+                <button id="menuPrincipal" type="button" class="enlace-nav activo">Mis turnos</button>
+                <button id="cerrarSesion" type="button">Cerrar sesión</button>
+            </nav>
+        </aside>
+
+        <main class="contenido">
+            <header class="encabezado">
+                <h1 id="titulo">Mis turnos</h1>
+                <p id="datosUsuario">Cargando usuario...</p>
+            </header>
+
+            <section class="seccion-turnos">
+                <div class="barra-herramientas">
+                    <h2 id="subtitulo">Turnos registrados</h2>
+                    <div class="filtros">
+                        <button id="recargar" type="button" class="boton-secundario">Actualizar</button>
+                    </div>
+                </div>
+
+                <p id="avisoAccion" class="aviso" role="status" aria-live="polite" hidden></p>
+
+                <div class="tabla-contenedor">
+                    <table class="tabla">
+                        <thead>
+                            <tr id="cabeceraTurnos"></tr>
+                        </thead>
+                        <tbody id="cuerpoTurnos"></tbody>
+                    </table>
+                    <p id="estadoTurnos" class="estado-tabla" role="status" aria-live="polite" hidden></p>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <dialog id="dialogoCancelar" class="dialogo" aria-labelledby="tituloCancelar">
+        <h2 id="tituloCancelar">Cancelar turno</h2>
+        <p id="resumenCancelar"></p>
+        <p>Esta acción no se puede deshacer.</p>
+        <div class="dialogo-botones">
+            <button type="button" id="volverCancelar" class="boton-claro">Volver</button>
+            <button type="button" id="enviarCancelar" class="boton-peligro">Sí, cancelar turno</button>
+        </div>
+    </dialog>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/mis-turnos.js"></script>
+</body>
+</html>
