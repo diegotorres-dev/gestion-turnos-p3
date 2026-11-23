@@ -1,4 +1,5 @@
 const db = require('../config/database'); //importa el pool de conexiones a MySQL para consultar la BD
+const bloqueoService = require('../services/bloqueoservice');
 
 //lo primero es asignar los estados válidos y horarios válidos
 
@@ -204,6 +205,11 @@ async function validarCreacionTurno(req, res, next) { //toda la validación para
             ); //El médico no puede estar asignado a dos turnos en el mismo horario
             if (mismoMedico.length > 0) {
                 return res.status(409).json({ error: 'El médico ya está asignado a otro turno en esa fecha y hora' });
+            }
+
+            const bloqueo = await bloqueoService.estaBloqueado(db, medico_confirmacion, fecha_turno, hora_turno);
+            if (bloqueo) {
+                return res.status(409).json({ error: `El médico tiene la agenda bloqueada en ese horario (${bloqueo.motivo})` });
             }
         }
 

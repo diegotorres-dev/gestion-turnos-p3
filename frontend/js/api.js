@@ -89,3 +89,98 @@ async function obtenerMisTurnos(token) {
 function cancelarMiTurno(token, id) {
     return modificarTurno(token, `mis-turnos/${id}`, 'cancelar');
 }
+
+async function pedirBloqueos(token, ruta, opciones) {
+    const respuesta = await fetch(`${API_URL}/bloqueos${ruta}`, {
+        ...opciones,
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    const datos = await respuesta.json();
+
+    if (!respuesta.ok) {
+        const error = new Error(datos.error || 'No se pudo realizar la operación');
+        error.estado = respuesta.status;
+        throw error;
+    }
+
+    return datos;
+}
+
+function obtenerVistaPreviaBloqueo(token, datos) {
+    const consulta = new URLSearchParams({
+        matricula_medico: datos.matricula_medico,
+        desde: datos.desde,
+        hasta: datos.hasta
+    });
+    return pedirBloqueos(token, `/vista-previa?${consulta}`);
+}
+
+function crearBloqueo(token, datos) {
+    return pedirBloqueos(token, '', { method: 'POST', body: JSON.stringify(datos) });
+}
+
+function obtenerBloqueos(token) {
+    return pedirBloqueos(token, '');
+}
+
+async function cargarTurnosMasivo(token, turnos) {
+    const respuesta = await fetch(`${API_URL}/turnos/masivo`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ turnos })
+    });
+
+    const datos = await respuesta.json();
+
+    if (!respuesta.ok) {
+        const error = new Error(datos.error || 'No se pudo realizar la carga');
+        error.estado = respuesta.status;
+        error.detalle = datos;
+        throw error;
+    }
+
+    return datos;
+}
+
+async function obtenerPracticas(token) {
+    const respuesta = await fetch(`${API_URL}/practicas`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    const datos = await respuesta.json();
+
+    if (!respuesta.ok) {
+        const error = new Error(datos.error || 'No se pudieron obtener las prácticas');
+        error.estado = respuesta.status;
+        throw error;
+    }
+
+    return datos;
+}
+
+async function obtenerMedicos(token) {
+    const respuesta = await fetch(`${API_URL}/medicos`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    const datos = await respuesta.json();
+
+    if (!respuesta.ok) {
+        const error = new Error(datos.error || 'No se pudieron obtener los médicos');
+        error.estado = respuesta.status;
+        throw error;
+    }
+
+    return datos;
+}

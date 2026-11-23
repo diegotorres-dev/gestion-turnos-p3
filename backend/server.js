@@ -5,6 +5,9 @@ const cors = require('cors'); //puse esto para evitar conflictos con el navegado
 
 const turnoroutes = require('./routes/turnoroutes'); //importo las rutas de turnos
 const authroutes = require('./routes/authroutes'); //importo las rutas de autenticación
+const bloqueoroutes = require('./routes/bloqueoroutes');
+const practicaroutes = require('./routes/practicaroutes');
+const medicoroutes = require('./routes/medicoroutes');
 
 const app = express(); //express() es la función que crea la aplicación, y "app" es el servidor en sí
 
@@ -16,6 +19,9 @@ app.use(cors({ //permite que el frontend del puerto 5500 haga peticiones al puer
 
 app.use('/api/auth', authroutes); //todo lo que llegue a esta URL de auth, mandalo al módulo de auth
 app.use('/api/turnos', turnoroutes); //lo mismo pero para turnos
+app.use('/api/bloqueos', bloqueoroutes);
+app.use('/api/practicas', practicaroutes);
+app.use('/api/medicos', medicoroutes);
 
 const PORT = 3000; //puerto que escucha el servidor
 

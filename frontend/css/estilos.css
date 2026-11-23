@@ -439,3 +439,142 @@ button:disabled {
 .tabla td {
     padding: 12px 8px;
 }
+
+[hidden] {
+    display: none !important;
+}
+
+.seccion-bloqueos {
+    margin-top: 24px;
+}
+
+.formulario-bloqueo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px 16px;
+    margin-top: 0;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.campo label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #002855;
+}
+
+.campo input {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.campo-ancho {
+    grid-column: 1 / -1;
+}
+
+.formulario-bloqueo .ayuda {
+    margin: 0;
+    font-size: 13px;
+    color: #555;
+}
+
+.formulario-bloqueo .mensaje-error {
+    margin: 0;
+    font-weight: bold;
+}
+
+.vista-previa {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+}
+
+.vista-previa h3,
+.subtitulo {
+    color: #002855;
+    font-size: 17px;
+}
+
+.subtitulo {
+    margin: 32px 0 12px;
+}
+
+@media (max-width: 800px) {
+    .formulario-bloqueo {
+        grid-template-columns: 1fr;
+    }
+}
+
+.tabla-carga input,
+.tabla-carga select {
+    width: 100%;
+    min-width: 120px;
+    margin: 0;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+}
+
+.tabla tbody tr.fila-con-error,
+.tabla tbody tr.fila-con-error:hover {
+    background: #fee2e2;
+}
+
+.numero-fila {
+    font-weight: bold;
+    color: #002855;
+}
+
+.ayuda-carga {
+    margin: 0 0 16px;
+    font-size: 13px;
+    color: #555;
+}
+
+.formulario-carga {
+    margin-top: 0;
+}
+
+.botones-carga {
+    margin-top: 16px;
+}
+
+.solo-lectores {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.sidebar nav a {
+    display: block;
+    padding: 12px;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.activo {
+    background: #ffffff22;
+}
+
+
+.campo select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    background: white;
+    margin-bottom: 0;
+}

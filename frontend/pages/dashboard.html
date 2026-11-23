@@ -17,6 +17,8 @@
 
             <nav>
                 <button id="irATurnos" type="button" class="enlace-nav activo">Turnos</button>
+                <a href="bloqueos.html" class="enlace-nav">Bloqueos de agenda</a>
+                <a href="carga-masiva.html" class="enlace-nav">Carga masiva</a>
                 <button id="cerrarSesion" type="button">Cerrar sesión</button>
             </nav>
         </aside>
@@ -92,8 +94,10 @@
         <h2 id="tituloConfirmar">Confirmar turno</h2>
         <p id="resumenConfirmar"></p>
         <form id="formConfirmar">
-            <label for="matriculaMedico">Matrícula del médico</label>
-            <input type="text" id="matriculaMedico" inputmode="numeric" pattern="[0-9]+" placeholder="Ejemplo: 1003" aria-describedby="ayudaMatricula" required>
+            <label for="matriculaMedico">Médico</label>
+            <select id="matriculaMedico" aria-describedby="ayudaMatricula" required>
+                <option value="">Cargando médicos...</option>
+            </select>
             <p id="ayudaMatricula" class="ayuda">Debe ser un médico habilitado para la práctica de este turno.</p>
             <p id="errorConfirmar" class="mensaje-error" role="alert" hidden></p>
             <div class="dialogo-botones">

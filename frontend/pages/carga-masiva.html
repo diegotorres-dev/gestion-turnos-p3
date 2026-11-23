@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carga masiva de turnos | Gestión de Turnos</title>
+    <meta name="description" content="Carga de varios turnos médicos en una sola operación.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+            <h2>Gestión de Turnos</h2>
+
+            <nav>
+                <a href="dashboard.html" class="enlace-nav">Turnos</a>
+                <a href="bloqueos.html" class="enlace-nav">Bloqueos de agenda</a>
+                <a href="carga-masiva.html" class="enlace-nav activo" aria-current="page">Carga masiva</a>
+                <button id="cerrarSesion" type="button">Cerrar sesión</button>
+            </nav>
+        </aside>
+
+        <main class="contenido">
+            <header class="encabezado">
+                <h1>Carga masiva de turnos</h1>
+                <p id="datosUsuario">Cargando usuario...</p>
+            </header>
+
+            <section id="carga" class="seccion-turnos">
+                <div class="barra-herramientas">
+                    <h2>Turnos a cargar</h2>
+                </div>
+
+                <p id="avisoCarga" class="aviso" role="status" aria-live="polite" hidden></p>
+
+                <p class="ayuda ayuda-carga">Podés cargar hasta <span id="maximoFilas"></span> turnos en una sola operación. Quedan confirmados con el médico indicado. Si una fila tiene un error no se carga ninguna, y te mostramos todos los errores juntos para que los corrijas.</p>
+
+                <form id="formCarga" class="formulario-carga">
+                    <div class="tabla-contenedor">
+                        <table class="tabla tabla-carga">
+                            <thead>
+                                <tr>
+                                    <th>Fila</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>DNI del paciente</th>
+                                    <th>Práctica</th>
+                                    <th>Médico</th>
+                                    <th>Medio</th>
+                                    <th><span class="solo-lectores">Quitar fila</span></th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuerpoCarga"></tbody>
+                        </table>
+                    </div>
+                    <div class="dialogo-botones botones-carga">
+                        <button type="button" id="agregarFila" class="boton-claro">Agregar fila</button>
+                        <button type="button" id="limpiarCarga" class="boton-claro">Limpiar todo</button>
+                        <button type="submit" id="enviarCarga">Cargar turnos</button>
+                    </div>
+                </form>
+
+                <div id="resultadoCarga" class="vista-previa" hidden>
+                    <h3 id="tituloResultadoCarga"></h3>
+                    <div class="tabla-contenedor">
+                        <table class="tabla">
+                            <thead>
+                                <tr>
+                                    <th>Fila</th>
+                                    <th>Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuerpoResultadoCarga"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/comun.js"></script>
+    <script src="../js/carga-masiva.js"></script>
+</body>
+</html>

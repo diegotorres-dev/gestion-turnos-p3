@@ -153,6 +153,33 @@ function iniciarPanel() {
     const enviarCancelar = document.getElementById('enviarCancelar');
 
     let turnoActual = null;
+    let medicos = null;
+    let errorMedicos = false;
+
+    function llenarMedicos() {
+        matriculaMedico.replaceChildren();
+        let textoInicial = 'Cargando médicos...';
+        if (medicos) {
+            textoInicial = 'Elegí un médico';
+        } else if (errorMedicos) {
+            textoInicial = 'No se pudieron cargar';
+        }
+        matriculaMedico.add(new Option(textoInicial, ''));
+        (medicos || []).forEach((m) => matriculaMedico.add(new Option(`${m.matricula_medico} - ${m.nombre_medico} ${m.apellido_medico}`, m.matricula_medico)));
+    }
+
+    async function cargarMedicos() {
+        try {
+            medicos = await obtenerMedicos(token);
+        } catch (error) {
+            if (error.estado === 401 || error.estado === 403) {
+                cerrarSesion();
+                return;
+            }
+            errorMedicos = true;
+        }
+        llenarMedicos();
+    }
 
     function resumenTurno(t) {
         return `Turno N.º ${t.id_turno} · ${formatearFecha(t.fecha_turno)} ${t.hora_turno.slice(0, 5)} · ${t.nombre_paciente} · ${t.nombre_practica}`;
@@ -208,6 +235,7 @@ function iniciarPanel() {
         turnoActual = t;
         avisoAccion.hidden = true;
         resumenConfirmar.textContent = resumenTurno(t);
+        llenarMedicos();
         matriculaMedico.value = t.medico_confirmacion ?? '';
         errorConfirmar.hidden = true;
         dialogoConfirmar.showModal();
@@ -291,4 +319,5 @@ function iniciarPanel() {
     document.getElementById('recargar').addEventListener('click', cargarTurnos);
 
     cargarTurnos();
+    cargarMedicos();
 }

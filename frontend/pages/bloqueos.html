@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloqueos de agenda | Gestión de Turnos</title>
+    <meta name="description" content="Bloqueo temporal de la agenda de un médico y gestión de los turnos afectados.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+            <h2>Gestión de Turnos</h2>
+
+            <nav>
+                <a href="dashboard.html" class="enlace-nav">Turnos</a>
+                <a href="bloqueos.html" class="enlace-nav activo" aria-current="page">Bloqueos de agenda</a>
+                <a href="carga-masiva.html" class="enlace-nav">Carga masiva</a>
+                <button id="cerrarSesion" type="button">Cerrar sesión</button>
+            </nav>
+        </aside>
+
+        <main class="contenido">
+            <header class="encabezado">
+                <h1>Bloqueos de agenda</h1>
+                <p id="datosUsuario">Cargando usuario...</p>
+            </header>
+
+            <section id="bloqueos" class="seccion-turnos">
+                <div class="barra-herramientas">
+                    <h2>Bloquear agenda de un médico</h2>
+                </div>
+
+                <p id="avisoBloqueo" class="aviso" role="status" aria-live="polite" hidden></p>
+
+                <form id="formBloqueo" class="formulario-bloqueo">
+                    <div class="campo">
+                        <label for="bloqueoMatricula">Médico</label>
+                        <select id="bloqueoMatricula" required>
+                            <option value="">Cargando médicos...</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="bloqueoDesde">Desde</label>
+                        <input type="datetime-local" id="bloqueoDesde" required>
+                    </div>
+                    <div class="campo">
+                        <label for="bloqueoHasta">Hasta</label>
+                        <input type="datetime-local" id="bloqueoHasta" required>
+                    </div>
+                    <div class="campo campo-ancho">
+                        <label for="bloqueoMotivo">Motivo</label>
+                        <input type="text" id="bloqueoMotivo" maxlength="255" placeholder="Ejemplo: Licencia médica" required>
+                    </div>
+                    <p class="ayuda campo-ancho">El horario "hasta" no se incluye: si bloqueás de 08:00 a 12:00, el turno de las 12:00 sigue en pie. Los turnos de ese médico dentro del período se cancelan con este motivo.</p>
+                    <p id="errorBloqueo" class="mensaje-error campo-ancho" role="alert" hidden></p>
+                    <div class="campo-ancho">
+                        <button type="submit" id="verAfectados">Ver turnos afectados</button>
+                    </div>
+                </form>
+
+                <div id="vistaPreviaBloqueo" class="vista-previa" hidden>
+                    <h3 id="tituloVistaPrevia"></h3>
+                    <div id="tablaVistaPrevia" class="tabla-contenedor">
+                        <table class="tabla">
+                            <thead>
+                                <tr>
+                                    <th>N.º</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Paciente</th>
+                                    <th>DNI</th>
+                                    <th>Práctica</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuerpoVistaPrevia"></tbody>
+                        </table>
+                    </div>
+                    <div id="botonesVistaPrevia" class="dialogo-botones">
+                        <button type="button" id="volverVistaPrevia" class="boton-claro">Volver</button>
+                        <button type="button" id="confirmarBloqueo" class="boton-peligro">Confirmar bloqueo</button>
+                    </div>
+                </div>
+
+                <h3 class="subtitulo">Bloqueos registrados</h3>
+                <div class="tabla-contenedor">
+                    <table class="tabla">
+                        <thead>
+                            <tr>
+                                <th>N.º</th>
+                                <th>Médico</th>
+                                <th>Desde</th>
+                                <th>Hasta</th>
+                                <th>Motivo</th>
+                                <th>Turnos cancelados</th>
+                                <th>Registrado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoBloqueos"></tbody>
+                    </table>
+                    <p id="estadoBloqueos" class="estado-tabla" role="status" aria-live="polite" hidden></p>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/comun.js"></script>
+    <script src="../js/bloqueos.js"></script>
+</body>
+</html>
